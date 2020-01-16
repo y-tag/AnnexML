@@ -16,6 +16,8 @@
 
 #pragma once
 
+#include <x86intrin.h>
+
 namespace {
 
 const size_t align_byte = 32;
