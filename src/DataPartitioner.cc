@@ -423,6 +423,7 @@ float DataPartitioner::RunPairwise(const std::vector<std::vector<std::pair<int, 
 
   if (K == 1) {
     if (verbose > 0) { fprintf(stderr, "\rPartitioning skip!\n"); }
+    K_ = K;
     return 0.0f;
   }
 
@@ -493,6 +494,10 @@ size_t DataPartitioner::GetNearestCluster(const std::vector<std::pair<int, float
 float DataPartitioner::GetNearestClusters(const std::vector<std::pair<int, float> > &datum,
                                               std::vector<size_t> *centers) const {
   if (centers == NULL) { return 0.0f; }
+  if (K_ <= 1 || w_index_.size() <= 1) {
+    centers->push_back(0);
+    return 0.0f;
+  }
 
   std::vector<float> ip_vec(K_, 0.0f);
 
